@@ -1,0 +1,30 @@
+<div class="bg-black text-white h-full p-6 space-y-8">
+  <!-- Barra de búsqueda -->
+  <div class="flex items-center space-x-4">
+    <button class="text-white bg-gray-800 p-2 rounded-full">
+      <fa-icon [icon]="iconArrowLeft"></fa-icon>
+    </button>
+    <input
+      type="text"
+      placeholder="Artistas, canciones, o podcasts"
+      class="flex-1 bg-gray-800 text-white placeholder-gray-400 px-4 py-2 rounded-full focus:outline-none"
+    />
+   <app-button-login-avatar></app-button-login-avatar>
+  </div>
+
+  <!-- Búsquedas recientes -->
+  <div>
+    <h2 class="text-xl font-bold mb-4">Busquedas recientes</h2>
+    <div class="grid grid-cols-2 gap-4">
+        <app-info-album></app-info-album>
+    </div>
+  </div>
+
+  <!-- Tus géneros principales -->
+  <div>
+    <h2 class="text-xl font-bold mb-4">Generos principales</h2>
+    <div class="grid grid-cols-3 gap-4">
+      <app-info-genres></app-info-genres>
+    </div>
+  </div>
+</div>
