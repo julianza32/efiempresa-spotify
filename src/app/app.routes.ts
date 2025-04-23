@@ -42,7 +42,15 @@ export const routes: Routes = [
           import('./pages/playlist/playlist.component').then(
             (m) => m.PlaylistComponent
           ),
+      },
+      {
+        path: 'not-found',
+        loadComponent: () =>
+          import('./pages/not-found/not-found.component').then(
+            (m) => m.NotFoundComponent
+          ),
       }
+
 
     ],
   },

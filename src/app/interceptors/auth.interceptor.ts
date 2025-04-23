@@ -49,7 +49,10 @@ export class AuthInterceptor implements HttpInterceptor {
           this.router.navigate(['/login']);
           return throwError(() => new Error('Session expired'));
         }
-
+        if (error.status === 404) {
+          this.router.navigate(['/not-found']);
+          return throwError(() => new Error('Not found'));
+        }
         return throwError(() => error);
       })
     );

@@ -24,61 +24,37 @@
   </div>
 
   <div class="p-6">
-    <div
-      *ngIf="
-        playList.tracks.items && playList.tracks.items.length > 0;
-        else emptyPlaylist
-      "
-    >
-      <div
-        class="grid grid-cols-[40px_1fr_1fr] text-gray-400 text-sm border-b border-gray-700 pb-2"
-      >
-        <div>#</div>
-        <div>Título</div>
-        <div>Duración</div>
-      </div>
-      <div
-        *ngFor="let song of playList.tracks.items; let i = index"
-        class="grid grid-cols-[40px_1fr_1fr] items-center text-sm text-gray-300 py-2 hover:bg-gray-800 rounded-lg transition"
-      >
-        <div>{{ i + 1 }}</div>
-        <div class="flex items-center space-x-4">
-          <div
-            class="w-12 h-12 flex items-center justify-center rounded-lg bg-gray-500 text-white font-bold text-lg"
-          >
-            {{ song.track.name.charAt(0).toUpperCase() }}
-          </div>
-          <div>
-            <p class="text-gray-400 text-xs text-white font-bold">
-              {{ song.track.name }}
-            </p>
-
-            <span
-              *ngFor="let artist of song.track.artists"
-              class="text-gray-400 text-xs"
-              >{{ artist.name }},
-            </span>
-          </div>
+      <div *ngIf="playList.tracks.items && playList.tracks.items.length>0 ; else emptyPlaylist">
+        <div class="grid grid-cols-[40px_1fr_1fr] text-gray-400 text-sm border-b border-gray-700 pb-2">
+          <div>#</div>
+          <div>Título</div>
+          <div>Duración</div>
         </div>
-        <div>{{ convertMsToMinutesAndSeconds(song.track.duration_ms) }}</div>
-      </div>
-    </div>
+        <div *ngFor="let song of playList.tracks.items; let i = index" class="grid grid-cols-[40px_1fr_1fr] items-center text-sm text-gray-300 py-2 hover:bg-gray-800 rounded-lg transition">
+          <div>{{ i + 1 }}</div>
+          <div class="flex items-center space-x-4">
+            <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-gray-500 text-white font-bold text-lg">
+              {{ song.track.name.charAt(0).toUpperCase() }}
+            </div>
+            <div>
+                <p class="text-gray-400 text-xs text-white font-bold">{{ song.track.name }}</p>
 
-    <ng-template #emptyPlaylist>
-      <div
-        class="flex flex-col items-center justify-center text-center space-y-4 mt-20"
-      >
-        <fa-icon [icon]="'music'" class="text-6xl text-gray-400"></fa-icon>
-        <p class="text-gray-400 text-lg">Esta playlist está vacía</p>
-        <p class="text-gray-500 text-sm">
-          Agrega canciones para empezar a disfrutar tu música.
-        </p>
-        <button
-          class="bg-green-500 text-white px-4 py-2 rounded-full hover:bg-green-600 transition"
-        >
-          Explorar música
-        </button>
+              <span *ngFor="let artist of song.track.artists" class="text-gray-400 text-xs">{{ artist.name}}, </span>
+            </div>
+          </div>
+          <div>{{ convertMsToMinutesAndSeconds(song.track.duration_ms) }}</div>
+        </div>
       </div>
-    </ng-template>
-  </div>
+
+  <ng-template #emptyPlaylist>
+        <div class="flex flex-col items-center justify-center text-center space-y-4 mt-20">
+          <fa-icon [icon]="'music'" class="text-6xl text-gray-400"></fa-icon>
+          <p class="text-gray-400 text-lg">Esta playlist está vacía</p>
+          <p class="text-gray-500 text-sm">Agrega canciones para empezar a disfrutar tu música.</p>
+          <button class="bg-green-500 text-white px-4 py-2 rounded-full hover:bg-green-600 transition">
+            Explorar música
+          </button>
+        </div>
+      </ng-template>
+    </div>
 </div>

@@ -1,59 +1,50 @@
 # SpotifyClone
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.7.
+Este proyecto fue generado utilizando [Angular CLI](https://github.com/angular/angular-cli) versión 19.1.7.
 
-## Development server
+## Descripción del proyecto
 
-To start a local development server, run:
+SpotifyClone es una aplicación web que replica algunas de las funcionalidades principales de Spotify, como la exploración de playlists, canciones y artistas. Este proyecto utiliza la [API Web de Spotify](https://developer.spotify.com/documentation/web-api/) para obtener datos en tiempo real y ofrece una experiencia de usuario moderna y responsiva.
 
-```bash
-ng serve
-```
+### Características principales:
+- **Estilos modernos con Tailwind CSS:** Toda la interfaz de usuario está diseñada utilizando Tailwind CSS, lo que permite un diseño limpio, responsivo y altamente personalizable.
+- **Interceptores HTTP:** El proyecto utiliza interceptores para manejar la autenticación con tokens de acceso y gestionar errores de manera centralizada.
+- **Integración con la API Web de Spotify:** Permite a los usuarios explorar playlists, canciones y artistas en tiempo real.
+- **Inicio de sesión con Spotify:** Los usuarios deben iniciar sesión con su cuenta de Spotify para acceder a las funcionalidades de la aplicación.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## Comenzando
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Para configurar y ejecutar el proyecto localmente, sigue estos pasos:
 
-```bash
-ng generate component component-name
-```
+### 1. Instalar dependencias
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+Asegúrate de tener [Node.js](https://nodejs.org/) y [npm](https://www.npmjs.com/) instalados en tu sistema. Luego, ejecuta el siguiente comando para instalar las dependencias del proyecto:
 
 ```bash
-ng build
+npm install
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### 2. Iniciar el servidor de desarrollo
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Para iniciar el servidor de desarrollo, ejecuta:
 
 ```bash
-ng test
+ng serve --host 127.0.0.1
 ```
 
-## Running end-to-end tests
+Una vez que el servidor esté en funcionamiento, abre tu navegador y navega a `http://127.0.0.1:4200/`. La aplicación se recargará automáticamente cada vez que modifiques alguno de los archivos fuente.
 
-For end-to-end (e2e) testing, run:
+---
 
-```bash
-ng e2e
-```
+## Uso de la API Web de Spotify
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Este proyecto utiliza la [API Web de Spotify](https://developer.spotify.com/documentation/web-api/) para obtener información sobre canciones, álbumes, artistas y playlists. Para acceder a estas funcionalidades, es necesario que el usuario inicie sesión con su cuenta de Spotify.
 
-## Additional Resources
+### Inicio de sesión con Spotify
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+1. Al abrir la aplicación, se te pedirá que inicies sesión con tu cuenta de Spotify.
+2. Asegúrate de usar el correo electrónico asociado a tu cuenta de Spotify para iniciar sesión.
+3. Una vez autenticado, podrás explorar tus playlists, buscar canciones y disfrutar de las funcionalidades de la aplicación.
+
