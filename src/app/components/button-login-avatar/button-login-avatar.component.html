@@ -1,12 +1,13 @@
-<!-- <div class="flex items-center space-x-2">
-      <img
-        src="assets/user-avatar.jpg"
-        alt="User Avatar"
-        class="w-8 h-8 rounded-full"
-      />
-      <span class="text-sm">davedirect3</span>
-    </div> -->
+<div *ngIf="sessionSignal()" class="flex items-center space-x-2">
+  <div
+    class="w-8 h-8 rounded-full bg-gray-500 flex items-center justify-center text-white font-bold"
+  >
+    {{ sessionSignal()?.display_name?.charAt(0)?.toUpperCase() }}
+  </div>
+  <span class="text-sm">{{ sessionSignal()?.display_name }}</span>
+</div>
 <button
+  *ngIf="!sessionSignal()"
   class="bg-green-500 text-white px-6 py-2 rounded-full font-medium hover:bg-green-600 transition-colors"
   (click)="login()"
 >

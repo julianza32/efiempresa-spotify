@@ -1,0 +1,17 @@
+<div class="flex flex-col h-screen">
+    <!-- Contenedor principal -->
+    <div class="flex flex-1 h-[90vh]">
+      <!-- Barra de navegación a la izquierda -->
+      <app-layout-nav [navItems]="navItems" class="w-64"></app-layout-nav>
+  
+      <!-- Contenido principal a la derecha -->
+      <div class="flex-1 bg-gray-900 overflow-y-auto">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  
+    <!-- Controles del reproductor en la parte inferior -->
+    <div class="bg-black h-[10vh]">
+      <app-player-buttons></app-player-buttons>
+    </div>
+  </div>

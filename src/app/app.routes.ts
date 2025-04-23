@@ -1,11 +1,20 @@
 import { Routes } from '@angular/router';
-
 export const routes: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./pages/home/home.component').then((m) => m.HomeComponent),
+      import('./pages/index/index.component').then((m) => m.IndexComponent),
     children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'home',
+      },
+      {
+        path: 'home',
+        loadComponent: () =>
+          import('./pages/home/home.component').then((m) => m.HomeComponent),
+      },
       {
         path: 'search',
         loadComponent: () =>
@@ -34,7 +43,6 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/login/login.component').then((m) => m.LoginComponent),
   },
-
   {
     path: 'callback',
     loadComponent: () =>
@@ -42,4 +50,5 @@ export const routes: Routes = [
         (m) => m.CallbackComponent
       ),
   },
+  { path: '**', redirectTo: 'home' },
 ];

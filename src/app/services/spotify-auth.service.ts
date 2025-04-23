@@ -1,24 +1,31 @@
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError, map, Observable, switchMap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class SpotifyAuthService {
-  clientId = 'TU_CLIENT_ID';
-  redirectUri = 'http://localhost:4200/callback';
-  scopes = [
-    'user-read-private',
-    'user-read-email',
-  ];
+  clientId = '464dac1f5e194c8e886022930e43380b';
+  redirectUri = 'http://127.0.0.1:4200/callback';
+  scopes = ['user-read-private', 'user-read-email'];
+
+  constructor(private http: HttpClient) {}
 
   private generateCodeVerifier(length = 128): string {
-    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    return Array.from({ length }, () => possible[Math.floor(Math.random() * possible.length)]).join('');
+    const possible =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    return Array.from(
+      { length },
+      () => possible[Math.floor(Math.random() * possible.length)]
+    ).join('');
   }
 
   private async generateCodeChallenge(verifier: string): Promise<string> {
     const data = new TextEncoder().encode(verifier);
     const digest = await crypto.subtle.digest('SHA-256', data);
     return btoa(String.fromCharCode(...new Uint8Array(digest)))
-      .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+      .replace(/\+/g, '-')
+      .replace(/\//g, '_')
+      .replace(/=+$/, '');
   }
 
   async login() {
@@ -27,36 +34,86 @@ export class SpotifyAuthService {
 
     localStorage.setItem('spotify_code_verifier', verifier);
 
-    const params = new URLSearchParams({
-      response_type: 'code',
-      client_id: this.clientId,
-      scope: this.scopes.join(' '),
-      redirect_uri: this.redirectUri,
-      code_challenge_method: 'S256',
-      code_challenge: challenge,
+    const params = new HttpParams({
+      fromObject: {
+        response_type: 'code',
+        client_id: this.clientId,
+        scope: this.scopes.join(' '),
+        redirect_uri: this.redirectUri,
+        code_challenge_method: 'S256',
+        code_challenge: challenge,
+      },
     });
 
-    window.location.href = `https://accounts.spotify.com/authorize?${params.toString()}`;
+    if (typeof window !== 'undefined') {
+      window.location.href = `https://accounts.spotify.com/authorize?${params.toString()}`;
+    } else {
+      console.error(
+        'Window is not defined. This code must run in a browser environment.'
+      );
+    }
   }
 
-  async handleCallback(code: string): Promise<any> {
+  handleCallback(code: string): Observable<any> {
+
     const verifier = localStorage.getItem('spotify_code_verifier');
 
-    const body = new URLSearchParams({
-      grant_type: 'authorization_code',
-      code,
-      redirect_uri: this.redirectUri,
-      client_id: this.clientId,
-      code_verifier: verifier!,
+    const body = new HttpParams({
+      fromObject: {
+        grant_type: 'authorization_code',
+        code,
+        redirect_uri: this.redirectUri,
+        client_id: this.clientId,
+        code_verifier: verifier!,
+      },
     });
 
-    const res = await fetch('https://accounts.spotify.com/api/token', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: body.toString(),
-    });
+    return this.http
+      .post('https://accounts.spotify.com/api/token', body.toString(), {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }),
+      })
+      .pipe(
+        switchMap((data: any) => {
+          const headers = new HttpHeaders({
+            Authorization: `Bearer ${data.access_token}`,
+            'Content-Type': 'application/json',
+          });
 
-    const data = await res.json();
-    return data; 
+          return this.http
+            .get('https://api.spotify.com/v1/me', { headers })
+            .pipe(
+              map((user: any) => ({
+                data,
+                user,
+              }))
+            );
+        })
+      );
+  }
+
+  refreshToken(): Observable<string> {
+    return this.http
+      .post<{ token: string }>(
+        '/api/auth/refresh',
+        {},
+        {
+          headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+          }),
+        }
+      )
+      .pipe(
+        map((response) => {
+          const newToken = response.token;
+          localStorage.setItem('authToken', newToken);
+          return newToken;
+        }),
+        catchError((error) => {
+          console.error('Error refreshing token:', error);
+          throw error;
+        })
+      );
   }
 }

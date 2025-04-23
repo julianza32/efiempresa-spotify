@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
-import { NavItems } from '../../../types/navItems';
+import { INavItems } from '../../../types/navItems';
 import { Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -11,7 +11,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   styleUrl: './layout-nav.component.scss',
 })
 export class LayoutNavComponent {
-  @Input() navItems: NavItems[] = [];
+  @Input() navItems: INavItems[] = [];
   router = inject(Router);
 
   navigate(route: string): void {
