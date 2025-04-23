@@ -4,6 +4,9 @@ import { SearchService } from '../../services/search.service';
 import { Album, Artist } from '../../../types/results';
 import { InfoAlbumComponent } from "../../components/info-album/info-album.component";
 
+export default {
+  renderMode: 'csr',
+};
 @Component({
   selector: 'app-list-albums',
   imports: [InfoAlbumComponent],

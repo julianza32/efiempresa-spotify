@@ -6,6 +6,9 @@ import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faMusic } from '@fortawesome/free-solid-svg-icons';
 
+export default {
+  renderMode: 'csr', 
+};
 @Component({
   selector: 'app-playlist',
   imports: [CommonModule, FontAwesomeModule],

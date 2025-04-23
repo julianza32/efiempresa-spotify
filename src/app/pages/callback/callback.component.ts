@@ -4,6 +4,9 @@ import { SpotifyAuthService } from '../../services/spotify-auth.service';
 import { Router } from '@angular/router';
 import { SesionService } from '../../services/session.service';
 
+export default {
+  renderMode: 'csr',
+};
 @Component({
   selector: 'app-callback',
   templateUrl: './callback.component.html',
