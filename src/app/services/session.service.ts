@@ -29,7 +29,6 @@ export class SesionService {
     if (typeof window === 'undefined') return;
     localStorage.removeItem('spotify_data_me');
     localStorage.removeItem('spotify_access_token');
-    localStorage.removeItem('spotify_code_verifier');
     this.sessionSubject.next(undefined);
   }
 }

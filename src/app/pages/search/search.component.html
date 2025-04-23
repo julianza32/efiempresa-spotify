@@ -8,57 +8,47 @@
       #searchInput
       (keyup.enter)="onSearch(searchInput.value)"
       type="text"
-      placeholder="Artistas, canciones, o podcasts"
-      class="flex-1 bg-gray-800 text-white placeholder-gray-400 px-4 py-2 rounded-full focus:outline-none"
+      placeholder="Artistas, canciones, o albumes"
+      class="flex-1 bg-white text-black placeholder-gray-400 px-4 py-2 rounded-full focus:outline-none"
     />
+    <button
+      (click)="onSearch(searchInput.value)"
+      class="bg-green-500 text-white px-4 py-2 rounded-full font-medium hover:bg-green-600 transition-colors flex items-center space-x-2"
+    >
+      <fa-icon [icon]="iconSearch"></fa-icon>
+      <span>Buscar</span>
+    </button>
     <app-button-login-avatar></app-button-login-avatar>
   </div>
 
- <!-- Tracks -->
- <div *ngIf="results?.tracks?.items?.length ?? 0 > 0">
-  <h2 class="text-xl font-bold mb-4">Canciones</h2>
-  <div class="grid grid-cols-5 gap-4">
-    <div *ngFor="let track of results!.tracks.items" class="bg-gray-800 p-4 rounded-lg">
-      <img
-        [src]="track.album.images[0].url || 'https://via.placeholder.com/150'"
-        alt="{{ track.name }}"
-        class="w-full h-32 object-cover rounded-lg mb-2"
-      />
-      <h3 class="text-lg font-bold">{{ track.name }}</h3>
-      <p class="text-gray-400">{{ track.artists[0].name }}</p>
-    </div>
+  <div
+    *ngIf="!results"
+    class="flex flex-col items-center justify-center h-full space-y-4"
+  >
+    <fa-icon [icon]="iconSearch" class="text-gray-500 text-6xl"></fa-icon>
+    <p class="text-gray-400 text-lg">
+      Empieza a buscar tus artistas, canciones o podcasts favoritos
+    </p>
   </div>
-</div>
+
+  <!-- Tracks -->
+  <div *ngIf="results?.tracks?.items?.length ?? 0 > 0">
+    <app-info-music  [title]="'Canciones'" [tracks]="results!.tracks.items"></app-info-music>
+  </div>
 
   <!-- Artistas -->
   <div *ngIf="results?.artists?.items?.length ?? 0 > 0">
-    <h2 class="text-xl font-bold mb-4">Artistas</h2>
-    <div class="grid grid-cols-2 gap-4">
-      <div *ngFor="let artist of results!.artists.items" class="bg-gray-800 p-4 rounded-lg">
-        <img *ngIf="artist.images.length > 0"
-          [src]="  artist.images[0].url"
-          alt="{{ artist.name }}"
-          class="w-full h-32 object-cover rounded-lg mb-2"
-        />
-        <div
-        *ngIf="artist.images.length === 0"
-        class="w-16 h-16 bg-gray-500 flex items-center justify-center text-white font-bold text-4xl"
-      >
-        {{ artist.name.charAt(0).toUpperCase() }}
-      </div>
-        <h3 class="text-lg font-bold">{{ artist.name }}</h3>
-        <p class="text-gray-400">{{ artist.type }}</p>
-
-      </div>
-      <!-- <app-info-album></app-info-album> -->
-    </div>
+    <app-info-artist
+      [title]="'Artistas'"
+      [artists]="results!.artists.items"
+    ></app-info-artist>
   </div>
 
   <!-- Tus albumes principales -->
   <div *ngIf="results?.albums?.items?.length ?? 0 > 0">
-    <h2 class="text-xl font-bold mb-4">Albumes</h2>
-    <div class="grid grid-cols-3 gap-4">
-      <!-- <app-info-genres></app-info-genres> -->
-    </div>
+    <app-info-album
+      [title]="'Albumes'"
+      [albums]="results!.albums.items"
+    ></app-info-album>
   </div>
 </div>

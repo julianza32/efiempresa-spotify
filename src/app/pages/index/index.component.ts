@@ -30,21 +30,5 @@ export class IndexComponent {
       isActive: false,
       isDisabled: false,
     },
-    {
-      title: 'Liked Songs',
-      route: '/liked-songs',
-      icon: faHeart,
-      imageUrl: null,
-      isActive: false,
-      isDisabled: false,
-    },
-    {
-      title: 'Your Library',
-      route: '/your-library',
-      icon:null,
-      imageUrl: null,
-      isActive: false,
-      isDisabled: false,
-    },
   ];
 }

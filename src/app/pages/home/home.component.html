@@ -1,2 +1,45 @@
-<app-button-login-avatar></app-button-login-avatar>
-<p>Home works!!</p>
+<div class="relative">
+  <div class="absolute top-4 right-4 mb-5">
+    <app-button-login-avatar></app-button-login-avatar>
+  </div>
+
+  <div class="p-6 top-10">
+    <h3 class="text-2xl font-bold text-white mb-4">Explorar todo</h3>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+      <div
+        *ngFor="let category of itemsCategories"
+        class="h-50 relative rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform"
+        [ngStyle]="{
+          'background-image': 'url(' + category.icons[0].url + ')',
+          'background-size': 'cover',
+          'background-position': 'center'
+        }"
+      >
+        <div class="absolute inset-0 bg-opacity-50"></div>
+        <h4 class="text-white text-xl font-bold absolute bottom-4 left-4 z-10">
+          {{ category.name }}
+        </h4>
+      </div>
+    </div>
+  </div>
+
+  <div class="p-6">
+    <h3 class="text-2xl font-bold text-white mb-4">Nuevos lanzamientos</h3>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+      <div
+        *ngFor="let release of itemsReleases"
+        class="h-50 relative rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform"
+        [ngStyle]="{
+          'background-image': 'url(' + release.images[0].url + ')',
+          'background-size': 'cover',
+          'background-position': 'center'
+        }"
+      >
+        <div class="absolute inset-0 bg-opacity-50"></div>
+        <h4 class="text-white text-xl font-bold absolute bottom-4 left-4 z-10">
+          {{ release.name }}
+        </h4>
+      </div>
+    </div>
+  </div>
+</div>

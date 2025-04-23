@@ -93,27 +93,4 @@ export class SpotifyAuthService {
       );
   }
 
-  refreshToken(): Observable<string> {
-    return this.http
-      .post<{ token: string }>(
-        '/api/auth/refresh',
-        {},
-        {
-          headers: new HttpHeaders({
-            'Content-Type': 'application/json',
-          }),
-        }
-      )
-      .pipe(
-        map((response) => {
-          const newToken = response.token;
-          localStorage.setItem('authToken', newToken);
-          return newToken;
-        }),
-        catchError((error) => {
-          console.error('Error refreshing token:', error);
-          throw error;
-        })
-      );
-  }
 }

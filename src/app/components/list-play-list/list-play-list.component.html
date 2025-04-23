@@ -1,0 +1,28 @@
+<div class="bg-black text-white min-h-screen">
+    <div>
+      <div
+        *ngFor="let playlist of listPlaylist"
+        class="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-800 transition cursor-pointer"
+      >
+    
+        <div (click)="navigate(playlist.id)" class="w-12 h-12 flex items-center justify-center rounded-md bg-gray-700 text-white font-bold text-base">
+          <ng-container *ngIf="playlist.images && playlist.images.length > 0; else avatar">
+            <img
+              [src]="playlist.images[0].url"
+              alt="{{ playlist.name }}"
+              class="w-full h-full object-cover rounded-md"
+            />
+          </ng-container>
+          <ng-template #avatar>
+            <fa-icon [icon]="iconMusic" class="text-xl"></fa-icon>
+          </ng-template>
+        </div>
+        <div (click)="navigate(playlist.id)" >
+          <p class="font-bold text-sm text-white truncate">{{ playlist.name }}</p>
+          <p class="text-gray-400 text-xs">
+            {{ playlist.type | titlecase }} • {{ playlist.owner.display_name }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>

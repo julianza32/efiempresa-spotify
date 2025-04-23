@@ -1,0 +1,62 @@
+<div class="bg-gradient-to-b from-purple-700 to-gray-900 text-white min-h-screen">
+  <div class="flex items-center space-x-6 p-6">
+    <img
+      [src]="infoAlbum.images[0].url"
+      alt="{{ infoAlbum.name }}"
+      class="w-48 h-48 object-cover rounded-lg shadow-lg"
+    />
+    <div>
+      <p class="uppercase text-sm font-bold text-gray-300">Álbum</p>
+      <h1 class="text-6xl font-bold">{{ infoAlbum.name }}</h1>
+      <p class="text-gray-400 mt-2 flex items-center space-x-2">
+        <span *ngFor="let artist of infoAlbum.artists" class="text-white font-bold">{{ artist.name }}</span>
+        <span class="text-gray-400">• {{ infoAlbum.release_date.slice(0, 4) }}</span>
+        <span class="text-gray-400">• {{ infoAlbum.total_tracks }} canciones, 1 h 2 min</span>
+      </p>
+    </div>
+  </div>
+
+  
+    <div class="flex items-center space-x-6 px-6">
+      <button class="bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center hover:bg-green-600 transition">
+        <fa-icon [icon]="iconPlay"></fa-icon>
+      </button>
+      <button class="text-gray-400 hover:text-white transition">
+        <fa-icon [icon]="iconHeart"></fa-icon>
+      </button>
+      <button class="text-gray-400 hover:text-white transition">
+        <fa-icon [icon]="iconDownload"></fa-icon>
+      </button>
+      <button class="text-gray-400 hover:text-white transition">
+        <fa-icon [icon]="iconElipsis"></fa-icon>
+      </button>
+    </div>
+  
+    <div class="px-6 mt-6">
+      <div class="grid px-6 grid-cols-[40px_1fr_1fr] text-gray-400 text-sm border-b border-gray-700 pb-2">
+        <div>#</div>
+        <div>Title</div>
+        <div>Duration</div>
+      </div>
+      <div *ngFor="let song of listSongs; let i = index" class="px-6 grid grid-cols-[40px_1fr_1fr] items-center text-sm text-gray-300 py-2 hover:bg-gray-800 rounded-lg transition">
+        <div>{{ i + 1 }}</div>
+        <div class="flex items-center space-x-4">
+          <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-gray-500 text-white font-bold text-lg">
+            <div>
+              {{ song.name.charAt(0).toUpperCase() }}
+            </div>
+          </div>
+          <div>
+            <p class="font-bold">{{ song.name }}</p>
+            <p *ngFor="let artist of song.artists" class="text-gray-400 text-xs">{{artist.name}}</p>
+          </div>
+        </div>
+        <div class="flex items-center justify-between">
+          <span>{{ convertMsToMinutesAndSeconds(song.duration_ms) }}</span>
+          <button class="text-gray-400 hover:text-green-500 transition">
+            <fa-icon [icon]="iconHeart"></fa-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>

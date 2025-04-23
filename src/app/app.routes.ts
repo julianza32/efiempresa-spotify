@@ -22,20 +22,28 @@ export const routes: Routes = [
             (m) => m.SearchComponent
           ),
       },
+   
       {
-        path: 'liked-songs',
+        path: 'artist/:id',
         loadComponent: () =>
-          import('./pages/liked-songs/liked-songs.component').then(
-            (m) => m.LikedSongsComponent
+          import('./pages/list-albums/list-albums.component').then(
+            (m) => m.ListAlbumsComponent
           ),
       },
       {
-        path: 'your-library',
+        path: 'album/:id',
         loadComponent: () =>
-          import('./pages/your-library/your-library.component').then(
-            (m) => m.YourLibraryComponent
+          import('./pages/list-songs/list-songs.component').then(
+            (m) => m.ListSongsComponent
           ),
-      },
+      },{
+        path: 'playlist/:id',
+        loadComponent: () =>
+          import('./pages/playlist/playlist.component').then(
+            (m) => m.PlaylistComponent
+          ),
+      }
+
     ],
   },
   {

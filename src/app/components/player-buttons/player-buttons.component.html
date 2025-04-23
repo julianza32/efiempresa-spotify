@@ -1,1 +1,21 @@
-<p>player-buttons works!</p>
+<div class="bg-gray-900 text-white p-4 rounded-lg flex flex-col items-center space-y-4">
+    <div class="flex items-center space-x-6">
+      <button class="text-gray-400 hover:text-white transition">
+        <fa-icon [icon]="iconBaack"></fa-icon>
+      </button>
+  
+      <button class="bg-green-500 text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-green-600 transition">
+        <fa-icon [icon]="iconPlay"></fa-icon>
+      </button>
+      <button class="text-gray-400 hover:text-white transition">
+        <fa-icon [icon]="iconForward"></fa-icon>
+      </button>
+    </div>
+    <div class="w-full flex items-center space-x-4">
+      <span class="text-gray-400 text-sm">0:00</span>
+      <div class="flex-1 bg-gray-700 h-1 rounded-full relative">
+        <div class="bg-green-500 h-1 rounded-full" style="width: 50%;"></div>
+      </div>
+      <span class="text-gray-400 text-sm">3:45</span>
+    </div>
+  </div>

@@ -4,7 +4,7 @@
   >
     {{ sessionSignal()?.display_name?.charAt(0)?.toUpperCase() }}
   </div>
-  <span class="text-sm">{{ sessionSignal()?.display_name }}</span>
+  <span class="text-sm text-white">{{ sessionSignal()?.display_name }}</span>
 </div>
 <button
   *ngIf="!sessionSignal()"
